@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -16,6 +18,7 @@ import me.dio.simulator.data.MatchesApi;
 import me.dio.simulator.databinding.ActivityMainBinding;
 import me.dio.simulator.domain.Match;
 import me.dio.simulator.domain.Team;
+import me.dio.simulator.ui.adapter.MatchesAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,12 +56,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupMatchesList() {
+        binding.rvMatches.setHasFixedSize(true);
+        binding.rvMatches.setLayoutManager(new LinearLayoutManager((this)));
+
         matchesApi.getMatches().enqueue(new Callback<List<Match>>() {
+            private RecyclerView.Adapter matchesAdapter;
+
             @Override
             public void onResponse(Call<List<Match>> call, Response<List<Match>> response) {
                 if (response.isSuccessful()) {
                     List<Match> matches = response.body();
                     Log.i("MatchApiSuccess", "Deu tudo certo! Valtaram partidas: " + matches.size());
+                    matchesAdapter = new MatchesAdapter(matches);
+                    binding.rvMatches.setAdapter(matchesAdapter);
                 } else {
                     Log.i("MatchApiError", response.raw().toString());
                     showErrorMessage();

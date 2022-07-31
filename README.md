@@ -11,3 +11,5 @@ As branches deste repositório simbolizam as implementações realizadas ao long
 
 3. Java e kotlin juntos!? Construindo apps android
   - [java-kotlin-juntos-construindo-apps-android](https://github.com/gapigo/matches-simulator-app/tree/java-kotlin-juntos-construindo-apps-android)
+4. Explorando o Firebase Para Apps Android Resilientes
+  - [explorando-o-firebase-para-apps-android-resilientes](https://github.com/gapigo/matches-simulator-app/tree/explorando-o-firebase-para-apps-android-resilientes)
